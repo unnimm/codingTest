@@ -1,0 +1,9 @@
+def solution(babbling):
+    answer = 0
+    for babble in babbling:
+        for accept in ['aya','ye','woo','ma']:
+            if accept*2 not in babble:
+                babble=babble.replace(accept,' ')
+        if len(babble.strip())==0:
+            answer +=1
+    return answer
