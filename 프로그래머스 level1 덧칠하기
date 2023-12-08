@@ -1,0 +1,11 @@
+def solution(n, m, section):
+    start = section[0]
+    end = section[0] + m - 1
+    count = 1
+    for se in section:
+        if start <= se <= end:
+            continue
+        start = se
+        end = se + m -1
+        count += 1
+    return count
