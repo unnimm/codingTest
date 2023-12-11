@@ -1,0 +1,17 @@
+def solution(data, ext, val_ext, sort_by):
+    new_data = []
+    data_info = {'code':0, 'date': 1, 'maximum': 2, 'remain':3}
+    i = data_info.get(ext)
+    j = data_info.get(sort_by)
+    print(i, j)
+        
+    #새로운 리스트 new_data에 ext으로 걸러진 데이터 삽입
+    for da in data:
+        if da[i] < val_ext:
+            new_data.append(da)
+    
+    
+    new_data = sorted(new_data, key=lambda new : new[j])
+    return new_data
+            
+    
