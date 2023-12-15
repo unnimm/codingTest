@@ -1,0 +1,38 @@
+def solution(bandage, health, attacks):
+    heal = health
+    count = 0
+    i = 1
+    attack_dict = {}
+    
+    for attack in attacks:
+        attack_dict[attack[0]] = attack[1]
+    
+    while(i < attacks[-1][0]+1):
+        #몬스터한테 공격받을 때
+        if i in attack_dict:
+            heal -= attack_dict[i]
+            count=0
+            print("몬스터한테 공격받은 시간:{}, 공격 데미지:{}, 남은 체력:{}".format(i,attack_dict[i],heal))
+            if heal <= 0:
+                return -1
+        #몬스터에게 공격받지 않을 때, 
+        else:
+            print("체력 추가! 시간:{}, 체력:{}".format(i,heal))
+            heal += bandage[1]
+            count += 1
+            #연속해서 체력을 충전한 경우
+            if count == bandage[0]:
+                print("체력 연속 채우기 성공! 시간:{} 추가체력 받기 전 체력:{}".format(i,heal))
+                if heal < health:
+                    heal += bandage[2]
+                    count = 0
+                    print("추가 체력 받은 총 체력:{}".format(heal))
+                if heal >= health:
+                    heal = health
+                    count = 0
+            #평소 최대 체력을 넘어가면 초기화        
+            if heal > health:
+                heal = health
+                count = 0
+        i+=1
+    return heal
