@@ -1,0 +1,46 @@
+def solution(id_list, report, k):
+    #신고 당한 유저들을 담은 딕셔너리 -> 카운트
+    report_user = {}
+    # 누가 누구를 신고했는지를 담은 딕셔너리
+    answer_user = {}
+    # k번 이상 신고당한 유저 list
+    k_list = []
+    result = {}
+    answer_list = []
+    
+    #누가 누굴 신고했는지 알려주는 
+    for id in id_list:
+        answer_user[id] = []
+    
+    
+    for user in report:
+        A, B = user.split()
+        if B in answer_user[A]:
+            continue
+        else:
+            answer_user[A].append(B)
+        if B not in report_user:  
+            report_user[B] = 1
+        else:
+            report_user[B] += 1
+    
+    #k의 수가 넘는 사용자
+    for user in report_user:
+        if report_user[user] >= k:
+            k_list.append(user)
+    
+    for user in answer_user:
+        result[user] = 0
+        for u in answer_user[user]:
+            if u in k_list:
+                if user in result:
+                    result[user] += 1
+                else:
+                    result[user] = 1
+            
+    for answer in result:
+        answer_list.append(result[answer])
+        
+    return answer_list
+    
+    
